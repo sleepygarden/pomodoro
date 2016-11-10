@@ -9,3 +9,7 @@ A timer for pair programming.
 ```
 ./pomodoro
 ```
+
+### Collaborators
+
+@jpotts244
