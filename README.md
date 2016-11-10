@@ -12,4 +12,4 @@ A timer for pair programming.
 
 ### Collaborators
 
-@jpotts244
+[@jpotts244](https://github.com/jpotts244)
