@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+WORK_TIME_IN_MINUTES = 25
+REST_TIME_IN_MINUTES = 5
+
+def loop_and_count(times_up_message, counter_minutes)
+  counter = 0
+  voice   = 'Agnes'
+
+  while(true) do
+    if counter == counter_minutes * 60
+      `say -v #{voice} '#{times_up_message}'`
+      break
+    end
+
+    counter     += 1
+    minutes_left = (counter_minutes - (counter / 60)) + 1
+    on_a_minute  = (counter % 60 == 0)
+
+    if counter == ((counter_minutes * 60) - 60)
+      `say -v 'Zarvox' 'one minute left'`
+      puts "⏲  1 minute left"
+    elsif counter % 60 == 0
+      puts "⏲  #{minutes_left} minutes left"
+    end
+
+    sleep 1
+  end
+end
+
+def start_coding_session
+  puts "Starting pair session 👾 🦄"
+  loop_and_count("Time is up... stretch your legs... see you in #{REST_TIME_IN_MINUTES} minutes", WORK_TIME_IN_MINUTES)
+  puts
+end
+
+def start_resting_session
+  puts "Rest time 💅 🍺"
+  loop_and_count("Time to get back to the code", REST_TIME_IN_MINUTES)
+  puts
+end
+
+Signal.trap("INT") do
+  `say -v 'Pipe Organ' 'Good bye and have a great day'`
+  exit 0
+end
+
+`say -v 'Agnes' 'Lets get to work'`
+
+while(true) do
+  start_coding_session
+  start_resting_session
+end
