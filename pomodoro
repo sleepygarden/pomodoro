@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-#!/usr/bin/env ruby
-
 minutes = ARGV[0].nil? ? 25 : ARGV[0].to_i
 seconds = minutes * 60
 elapsed = 0
