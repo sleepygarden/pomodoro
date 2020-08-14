@@ -2,7 +2,7 @@
 
 ### Description
 
-A timer for pair programming.
+A fun command-line timer for pair programming.
 
 ### How to run it
 
