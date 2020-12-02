@@ -4,19 +4,31 @@ minutes = ARGV[0].nil? ? 25 : ARGV[0].to_i
 seconds = minutes * 60
 elapsed = 0
 
-`say "focused work time begins now, for #{minutes} minutes"`
-puts "[#{Time.now}] starting a #{minutes} minute pomodoro"
+def now
+  "[#{Time.now.strftime "%b %e %l:%M:%S%P"}]"
+end
+
+def alert(message)
+  `osascript -e 'display notification "#{now}\n#{message}" with title "Pomodoro"'`
+  puts "#{now}\n#{message}"
+  `say #{message}`
+end
+
+def minute_fmt(minute)
+  "#{minute} minute#{minute > 1 ? 's' : ''}"
+end
+
+alert "Focused work time begins now, for #{minute_fmt minutes}"
 
 seconds.times do |i|
   print '.'
 
   if ((i + 1) % 60) == 0
     elapsed += 1
-    puts; puts "[#{Time.now}] #{elapsed} minute#{elapsed > 1 ? 's' : ''} elapsed"
+    puts; puts "#{now} #{minute_fmt elapsed} elapsed"
   end
 
   sleep 1
 end
 
-puts "[#{Time.now}] finished"
-`say "pomodoro is done, stretch your legs"`
+alert "Finished focused work time. Go stretch!"
